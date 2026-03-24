@@ -108,6 +108,8 @@ GitHub Actions runs on push, pull requests, and manual dispatch with:
 
 > Note: `package-lock.json` is committed so GitHub Actions can safely use npm caching.
 
+> Optional: set repository variable `APP_URL` to show your live app link in the workflow summary.
+
 ## Future-Ready Extensions
 
 The code is organized for easy additions:

@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       NEXT_TELEMETRY_DISABLED: '1'
+      APP_URL: ${{ vars.APP_URL }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -39,6 +40,7 @@ jobs:
         run: npm run build
 
       - name: Upload Next.js build artifact
+        id: upload_build
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -46,3 +48,14 @@ jobs:
           path: .next
           if-no-files-found: error
           include-hidden-files: true
+
+      - name: Publish app and artifact links in summary
+        if: always()
+        run: |
+          echo "## LocalBoost AI Links" >> "$GITHUB_STEP_SUMMARY"
+          if [ -n "$APP_URL" ]; then
+            echo "- App URL: $APP_URL" >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "- App URL: Not set. Add repository variable APP_URL." >> "$GITHUB_STEP_SUMMARY"
+          fi
+          echo "- Build Artifact: ${{ steps.upload_build.outputs.artifact-url }}" >> "$GITHUB_STEP_SUMMARY"
