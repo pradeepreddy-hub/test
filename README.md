@@ -104,7 +104,7 @@ GitHub Actions runs on push, pull requests, and manual dispatch with:
 - `npm run lint`
 - `npm run typecheck`
 - `npm run build`
-- Upload `.next` as build artifact
+- Upload `.next` as build artifact (hidden files enabled in artifact action)
 
 > Note: `package-lock.json` is committed so GitHub Actions can safely use npm caching.
 
