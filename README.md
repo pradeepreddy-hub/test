@@ -106,6 +106,8 @@ GitHub Actions runs on push, pull requests, and manual dispatch with:
 - `npm run build`
 - Upload `.next` as build artifact
 
+> Note: npm cache in GitHub Actions is intentionally disabled until a lockfile (`package-lock.json`) is committed.
+
 ## Future-Ready Extensions
 
 The code is organized for easy additions:
