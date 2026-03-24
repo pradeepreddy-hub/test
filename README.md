@@ -162,6 +162,8 @@ GitHub Actions runs on push, pull requests, and manual dispatch with:
 
 The workflow is split into visual stages: **Lint**, **Unit Tests**, **Typecheck**, and **Build**.
 
+Node 24 action runtime is opted in via `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true` to stay ahead of GitHub deprecation notices.
+
 ## Future-Ready Extensions
 
 The code is organized for easy additions:
