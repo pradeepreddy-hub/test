@@ -97,6 +97,8 @@ src/
 
 ## Docker
 
+This project is fully **Dockerized** and can be built/run with the included `Dockerfile`.
+
 Build image:
 
 ```bash
