@@ -48,11 +48,13 @@ npm install
 cp .env.example .env.local
 ```
 
-3. Add your OpenAI key in `.env.local`:
+3. (Optional) Add your OpenAI key in `.env.local`:
 
 ```bash
 OPENAI_API_KEY=your_api_key_here
 ```
+
+If you skip this key, LocalBoost AI will use built-in fallback content generation for demo/testing.
 
 4. Start development server:
 
@@ -112,6 +114,8 @@ docker run -d --name localboost-ai -p 3000:3000 \
   -e OPENAI_API_KEY=your_api_key_here \
   localboost-ai:latest
 ```
+
+`OPENAI_API_KEY` is optional. Without it, fallback content is returned by the API for demo usage.
 
 Open `http://localhost:3000`
 
