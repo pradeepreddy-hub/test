@@ -89,3 +89,33 @@ jobs:
             echo "- App URL: Not set. Add repository variable APP_URL." >> "$GITHUB_STEP_SUMMARY"
           fi
           echo "- Build Artifact: ${{ steps.upload_build.outputs.artifact-url }}" >> "$GITHUB_STEP_SUMMARY"
+
+
+  docker_smoke:
+    name: Docker Build & Run
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t localboost-ai:ci .
+
+      - name: Run Docker container
+        run: docker run -d --name localboost-ai -p 3000:3000 localboost-ai:ci
+
+      - name: Wait for app and validate home page
+        run: |
+          for i in {1..30}; do
+            if curl -fsS http://localhost:3000 >/dev/null; then
+              echo "App is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "App did not start in time"
+          docker logs localboost-ai || true
+          exit 1
+
+      - name: Stop container
+        if: always()
+        run: docker rm -f localboost-ai || true

@@ -161,12 +161,13 @@ GitHub Actions runs on push, pull requests, and manual dispatch with:
 - `npm run typecheck`
 - `npm run build`
 - Upload `.next` as build artifact (hidden files enabled in artifact action)
+- Docker build + run smoke check (`docker build` + `docker run` + HTTP probe)
 
 > Note: `package-lock.json` is committed so GitHub Actions can safely use npm caching.
 
 > Optional: set repository variable `APP_URL` to show your live app link in the workflow summary.
 
-The workflow is split into visual stages: **Lint**, **Unit Tests**, **Typecheck**, and **Build**.
+The workflow is split into visual stages: **Lint**, **Unit Tests**, **Typecheck**, **Build**, and **Docker Build & Run**.
 
 Node 24 action runtime is opted in via `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24=true` to stay ahead of GitHub deprecation notices.
 
